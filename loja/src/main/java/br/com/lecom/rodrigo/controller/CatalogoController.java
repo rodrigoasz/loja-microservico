@@ -21,7 +21,6 @@ public class CatalogoController {
 	public List<Produto> findCatalogo(){
 		List<Produto> produtos = new ArrayList<>();
 		produtos = catalogoProxy.findAll();
-	
 		return produtos;
 		
 	}
