@@ -2,6 +2,7 @@ package br.com.lecom.rodrigo.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import br.com.lecom.rodrigo.Dto.PedidoDto;
@@ -17,6 +18,7 @@ public class Pedido implements Serializable {
 	private Endereco enderecoRemetente;
 	private BigDecimal valor;
 	private String codigoRastreio;
+	private LocalDate previsaoEntrega;
 
 	public Pedido() {
 	}
@@ -82,11 +84,20 @@ public class Pedido implements Serializable {
 	public void setCodigoRastreio(String codigoRastreio) {
 		this.codigoRastreio = codigoRastreio;
 	}
+	
 
 //	public void adicionaProduto(ProdutoResponse produto) {
 //		this.produtos.add(produto);
 //		this.valor.add(produto.getPrecoUnitario());
 //	}
+
+	public LocalDate getPrevisaoEntrega() {
+		return previsaoEntrega;
+	}
+
+	public void setPrevisaoEntrega(LocalDate previsaoEntrega) {
+		this.previsaoEntrega = previsaoEntrega;
+	}
 
 	public void calculaValor(List<ProdutoResponse> produtos) {
 		this.valor = new BigDecimal(0);
