@@ -83,10 +83,10 @@ public class Pedido implements Serializable {
 		this.codigoRastreio = codigoRastreio;
 	}
 
-	public void adicionaProduto(ProdutoResponse produto) {
-		this.produtos.add(produto);
-		this.valor.add(produto.getPrecoUnitario());
-	}
+//	public void adicionaProduto(ProdutoResponse produto) {
+//		this.produtos.add(produto);
+//		this.valor.add(produto.getPrecoUnitario());
+//	}
 
 	public void calculaValor(List<ProdutoResponse> produtos) {
 		this.valor = new BigDecimal(0);
