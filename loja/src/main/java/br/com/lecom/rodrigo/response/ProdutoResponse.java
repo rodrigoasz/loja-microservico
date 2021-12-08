@@ -2,13 +2,13 @@ package br.com.lecom.rodrigo.response;
 
 import java.math.BigDecimal;
 
-public class Produto {
+public class ProdutoResponse {
 	private Long id;
 	private String nomeProduto;
 	private BigDecimal precoUnitario;
 	
-	public Produto() {}
-	public Produto(Long id, String nomeProduto, BigDecimal precoUnitario) {
+	public ProdutoResponse() {}
+	public ProdutoResponse(Long id, String nomeProduto, BigDecimal precoUnitario) {
 		super();
 		this.id = id;
 		this.nomeProduto = nomeProduto;
@@ -31,6 +31,10 @@ public class Produto {
 	}
 	public void setPrecoUnitario(BigDecimal precoUnitario) {
 		this.precoUnitario = precoUnitario;
+	}
+	@Override
+	public String toString() {
+		return "Produto [id=" + id + ", nomeProduto=" + nomeProduto + ", precoUnitario=" + precoUnitario + "]";
 	}
 	
 	
