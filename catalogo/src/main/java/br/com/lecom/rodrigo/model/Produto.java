@@ -4,9 +4,17 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Produto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nomeProduto;
 	private String categoria;
@@ -14,9 +22,8 @@ public class Produto implements Serializable{
 	
 	public Produto() {}
 
-	public Produto(long id, String nomeProduto , String categoria, BigDecimal precoUnitario) {
+	public Produto(String nomeProduto , String categoria, BigDecimal precoUnitario) {
 		super();
-		this.id = id;
 		this.nomeProduto = nomeProduto;
 		this.categoria = categoria;
 		this.precoUnitario = precoUnitario;
@@ -32,10 +39,6 @@ public class Produto implements Serializable{
 
 	public Long getId() {
 		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getCategoria() {

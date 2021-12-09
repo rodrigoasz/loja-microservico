@@ -2,17 +2,19 @@ package br.com.lecom.rodrigo.dto;
 
 import java.math.BigDecimal;
 
+import br.com.lecom.rodrigo.model.Produto;
+
 public class ProdutoDto {
 	private Long id;
 	private String nomeProduto;
 	private BigDecimal precoUnitario;
 	
 	public ProdutoDto() {}
-	public ProdutoDto(Long id, String nomeProduto, BigDecimal precoUnitario) {
+	public ProdutoDto(Produto produto) {
 		super();
-		this.id = id;
-		this.nomeProduto = nomeProduto;
-		this.precoUnitario = precoUnitario;
+		this.id = produto.getId();
+		this.nomeProduto = produto.getNomeProduto();
+		this.precoUnitario = produto.getPrecoUnitario();
 	}
 	public Long getId() {
 		return id;
