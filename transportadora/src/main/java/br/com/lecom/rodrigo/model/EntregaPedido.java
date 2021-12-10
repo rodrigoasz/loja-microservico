@@ -12,7 +12,7 @@ import br.com.lecom.rodrigo.response.PedidoEntregaResponse;
 
 @Entity
 public class EntregaPedido {
-	private static int contador = 0;
+	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;	
@@ -23,12 +23,11 @@ public class EntregaPedido {
 	private String codigoRastreio;
 	
 	public EntregaPedido(PedidoEntregaResponse response) {
-		contador++;
+	
 		this.pedidoId = response.getId();
 		this.enderecoRemetente = response.getEnderecoRemetente().toString();
 		this.enderecoDestinatario = response.getEnderecoDestinatario().toString();
-		this.previsaoParaEntrega = LocalDate.now().plusDays(3l);
-		this.codigoRastreio = "BR"+ contador;
+		
 		
 	}
 	public Long getId() {
@@ -55,14 +54,12 @@ public class EntregaPedido {
 	public LocalDate getPrevisaoParaEntrega() {
 		return previsaoParaEntrega;
 	}
-	public void setPrevisaoParaEntrega(LocalDate previsaoParaEntrega) {
-		this.previsaoParaEntrega = previsaoParaEntrega;
-	}
 	public String getCodRastreio() {
 		return codigoRastreio;
 	}
-	public void setCodRastreio(String codRastreio) {
-		this.codigoRastreio = codRastreio;
+	public void setCodRastreio() {
+		this.previsaoParaEntrega = LocalDate.now().plusDays(3l);
+		this.codigoRastreio = "BR"+ id;
 	}
 	
 	
