@@ -24,9 +24,7 @@ public class ProdutoService {
 		produtos.forEach(produto -> {
 			ProdutoDto produtoDto = new ProdutoDto(produto);
 			produtosDTO.add(produtoDto);
-		}) ;
+		});
 		return produtosDTO;
-		
 	}
-
 }

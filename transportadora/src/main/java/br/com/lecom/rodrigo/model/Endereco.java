@@ -1,6 +1,8 @@
 package br.com.lecom.rodrigo.model;
 
 public class Endereco {
+	
+
 	private String endereco;
 	private String bairro;
 	private String cidade;
@@ -17,6 +19,7 @@ public class Endereco {
 		this.estado = estado;
 		this.cep = cep;
 	}
+
 	public String getEndereco() {
 		return endereco;
 	}
@@ -46,5 +49,9 @@ public class Endereco {
 	}
 	public void setCep(String cep) {
 		this.cep = cep;
+	}
+	@Override
+	public String toString() {
+		return (endereco +" - "+ bairro + ". " + cidade + " - " + estado + ". CEP: " + cep );
 	}
 }

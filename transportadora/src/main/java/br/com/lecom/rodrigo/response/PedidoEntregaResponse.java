@@ -3,15 +3,15 @@ package br.com.lecom.rodrigo.response;
 import br.com.lecom.rodrigo.model.Endereco;
 
 public class PedidoEntregaResponse {
-	private Long pedidoId;
+	private Long id;
 	private Endereco enderecoRemetente;
 	private Endereco enderecoDestinatario;
 	
-	public Long getPedidoId() {
-		return pedidoId;
+	public Long getId() {
+		return id;
 	}
-	public void setPedidoId(Long pedidoId) {
-		this.pedidoId = pedidoId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public Endereco getEnderecoRemetente() {
 		return enderecoRemetente;

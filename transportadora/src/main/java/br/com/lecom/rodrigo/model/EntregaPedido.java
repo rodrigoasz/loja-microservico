@@ -2,24 +2,33 @@ package br.com.lecom.rodrigo.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 import br.com.lecom.rodrigo.response.PedidoEntregaResponse;
 
+@Entity
 public class EntregaPedido {
-	private static Long id = 0l;
-	//private Long id;	
+	private static int contador = 0;
+	@Id
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	private Long id;	
 	private Long pedidoId;
-	private Endereco enderecoRemetente;
-	private Endereco enderecoDestinatario;
+	private String enderecoRemetente;
+	private String enderecoDestinatario;
 	private LocalDate previsaoParaEntrega;
 	private String codigoRastreio;
 	
 	public EntregaPedido(PedidoEntregaResponse response) {
-		id++;
-		this.pedidoId = response.getPedidoId();
-		this.enderecoRemetente = response.getEnderecoRemetente();
-		this.enderecoDestinatario = response.getEnderecoDestinatario();
+		contador++;
+		this.pedidoId = response.getId();
+		this.enderecoRemetente = response.getEnderecoRemetente().toString();
+		this.enderecoDestinatario = response.getEnderecoDestinatario().toString();
 		this.previsaoParaEntrega = LocalDate.now().plusDays(3l);
-		this.codigoRastreio = "BR"+ id;
+		this.codigoRastreio = "BR"+ contador;
 		
 	}
 	public Long getId() {
@@ -31,16 +40,16 @@ public class EntregaPedido {
 	public void setPedidoId(Long pedidoId) {
 		this.pedidoId = pedidoId;
 	}
-	public Endereco getEnderecoRemetente() {
+	public String getEnderecoRemetente() {
 		return enderecoRemetente;
 	}
-	public void setEnderecoRemetente(Endereco enderecoRemetente) {
+	public void setEnderecoRemetente(String enderecoRemetente) {
 		this.enderecoRemetente = enderecoRemetente;
 	}
-	public Endereco getEnderecoDestinatario() {
+	public String getEnderecoDestinatario() {
 		return enderecoDestinatario;
 	}
-	public void setEnderecoDestinatario(Endereco enderecoDestinatario) {
+	public void setEnderecoDestinatario(String enderecoDestinatario) {
 		this.enderecoDestinatario = enderecoDestinatario;
 	}
 	public LocalDate getPrevisaoParaEntrega() {
