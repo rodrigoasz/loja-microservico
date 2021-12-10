@@ -4,8 +4,8 @@ import br.com.lecom.rodrigo.model.Endereco;
 
 public class PedidoEntregaResponse {
 	private Long id;
-	private Endereco enderecoRemetente;
-	private Endereco enderecoDestinatario;
+	private String enderecoRemetente;
+	private String enderecoDestinatario;
 	
 	public Long getId() {
 		return id;
@@ -13,18 +13,19 @@ public class PedidoEntregaResponse {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Endereco getEnderecoRemetente() {
+	public String getEnderecoRemetente() {
 		return enderecoRemetente;
 	}
-	public void setEnderecoRemetente(Endereco enderecoRemetente) {
+	public void setEnderecoRemetente(String enderecoRemetente) {
 		this.enderecoRemetente = enderecoRemetente;
 	}
-	public Endereco getEnderecoDestinatario() {
+	public String getEnderecoDestinatario() {
 		return enderecoDestinatario;
 	}
-	public void setEnderecoDestinatario(Endereco enderecoDestinatario) {
+	public void setEnderecoDestinatario(String enderecoDestinatario) {
 		this.enderecoDestinatario = enderecoDestinatario;
 	}
 	
+
 	
 }

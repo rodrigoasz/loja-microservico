@@ -25,8 +25,8 @@ public class EntregaPedido {
 	public EntregaPedido(PedidoEntregaResponse response) {
 	
 		this.pedidoId = response.getId();
-		this.enderecoRemetente = response.getEnderecoRemetente().toString();
-		this.enderecoDestinatario = response.getEnderecoDestinatario().toString();
+		this.enderecoRemetente = response.getEnderecoRemetente();
+		this.enderecoDestinatario = response.getEnderecoDestinatario();
 		
 		
 	}
