@@ -1,7 +1,11 @@
 package br.com.lecom.rodrigo.model;
 
-public class Endereco {
+import java.io.Serializable;
+import java.util.Objects;
+
+public class Endereco implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	
 	private String endereco;
 	private String bairro;
@@ -51,8 +55,28 @@ public class Endereco {
 	}
 
 	@Override
+	public int hashCode() {
+		return Objects.hash(bairro, cep, cidade, endereco, estado);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Endereco other = (Endereco) obj;
+		return Objects.equals(bairro, other.bairro) && Objects.equals(cep, other.cep)
+				&& Objects.equals(cidade, other.cidade) && Objects.equals(endereco, other.endereco)
+				&& Objects.equals(estado, other.estado);
+	}
+
+	@Override
 	public String toString() {
-		return (endereco +" - "+ bairro + ". " + cidade + " - " + estado + ". CEP: " + cep );
+		return "Endereco [endereco=" + endereco + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado
+				+ ", cep=" + cep + "]";
 	}
 	
 	

@@ -18,58 +18,58 @@ import br.com.lecom.rodrigo.model.Endereco;
 import br.com.lecom.rodrigo.model.Loja;
 import br.com.lecom.rodrigo.model.Pedido;
 import br.com.lecom.rodrigo.proxy.TransportadoraProxy;
-import br.com.lecom.rodrigo.repository.PedidoRepository;
 import br.com.lecom.rodrigo.response.CodRastreioResponse;
 import br.com.lecom.rodrigo.response.ProdutoResponse;
-import br.com.lecom.rodrigo.service.PedidoService;
 
 @RestController
 @RequestMapping("/pedidos")
 public class PedidoController {
-
-
 	@Autowired
-	private PedidoService service;
+	private TransportadoraProxy proxy;
 	
-//	@GetMapping()
-//	public List<Pedido> findAll() {
-////		List<Pedido> pedidos = MockPedidos();
-//
-//		return pedidos;
-//	}
-//	@GetMapping(value="/{id}")
-//	public Pedido findId(@PathVariable int id) {
-////		List<Pedido> pedidos = MockPedidos();
-//		Pedido pedido = pedidos.get(id);
-//
-//		return pedido;
-//	}
+	@GetMapping()
+	public List<Pedido> findAll() {
+		List<Pedido> pedidos = MockPedidos();
+
+		return pedidos;
+	}
+	@GetMapping(value="/{id}")
+	public Pedido findId(@PathVariable int id) {
+		List<Pedido> pedidos = MockPedidos();
+		Pedido pedido = pedidos.get(id);
+
+		return pedido;
+	}
 	
 	@PostMapping()
 	public Pedido realizaPedido(@RequestBody PedidoDto pedidoDto) {
-		
-		return service.realizaPedido(pedidoDto);
+		Pedido pedido = new Pedido(pedidoDto);
+		PedidoEntregaDto pedidoEntregaDto = new PedidoEntregaDto(pedido);
+		CodRastreioResponse rastreioResponse = proxy.enviaPostagem(pedidoEntregaDto);
+		pedido.setCodigoRastreio(rastreioResponse.getCodigoRastreio());
+		pedido.setPrevisaoEntrega(rastreioResponse.getPrevisaoParaEntrega());
+		return pedido;
 	}
 
-//	private List<Pedido> MockPedidos() {
-//		List<Pedido> pedidos = new ArrayList<>();
-//
-//		ProdutoResponse produto1 = new ProdutoResponse((long) 1, "Produto " + 1, BigDecimal.TEN);
-//		ProdutoResponse produto2 = new ProdutoResponse((long) 2, "Produto " + 2, BigDecimal.ONE);
-//
-//		List<ProdutoResponse> produtos = new ArrayList<>();
-//		produtos.add(produto1);
-//		produtos.add(produto2);
-//		List<ProdutoResponse> produtos1 = new ArrayList<>();
-//		produtos1.add(produto1);
-//
-//		Endereco enderecoDestino = new Endereco("Rua Sebastiao 1-30", "Vila Maria", "Bauru", "São Paulo", "30.451-908");
-//		Pedido pedido = new Pedido((long) 0, produtos, enderecoDestino, Loja.LOJA_ENDERECO, BigDecimal.TEN, "");
-//		Pedido pedido2 = new Pedido((long) 1, produtos1, enderecoDestino, Loja.LOJA_ENDERECO, BigDecimal.ONE, "");
-//
-//		pedidos.add(pedido);
-//		pedidos.add(pedido2);
-//
-//		return pedidos;
-//	}
+	private List<Pedido> MockPedidos() {
+		List<Pedido> pedidos = new ArrayList<>();
+
+		ProdutoResponse produto1 = new ProdutoResponse((long) 1, "Produto " + 1, BigDecimal.TEN);
+		ProdutoResponse produto2 = new ProdutoResponse((long) 2, "Produto " + 2, BigDecimal.ONE);
+
+		List<ProdutoResponse> produtos = new ArrayList<>();
+		produtos.add(produto1);
+		produtos.add(produto2);
+		List<ProdutoResponse> produtos1 = new ArrayList<>();
+		produtos1.add(produto1);
+
+		Endereco enderecoDestino = new Endereco("Rua Sebastiao 1-30", "Vila Maria", "Bauru", "São Paulo", "30.451-908");
+		Pedido pedido = new Pedido((long) 0, produtos, enderecoDestino, Loja.LOJA_ENDERECO, BigDecimal.TEN, "");
+		Pedido pedido2 = new Pedido((long) 1, produtos1, enderecoDestino, Loja.LOJA_ENDERECO, BigDecimal.ONE, "");
+
+		pedidos.add(pedido);
+		pedidos.add(pedido2);
+
+		return pedidos;
+	}
 }

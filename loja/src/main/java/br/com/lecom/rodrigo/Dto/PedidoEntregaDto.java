@@ -5,44 +5,31 @@ import br.com.lecom.rodrigo.model.Pedido;
 
 public class PedidoEntregaDto {
 	private Long id;
-	private String enderecoDestinatario;
-	private String enderecoRemetente;
+	private Endereco enderecoDestinatario;
+	private Endereco enderecoRemetente;
 	
-	public PedidoEntregaDto(Pedido pedido, Endereco enderecoRemetente) {
+	public PedidoEntregaDto(Pedido pedido) {
 		this.id = pedido.getId();
-		this.enderecoRemetente = enderecoRemetente.toString();
+		this.enderecoRemetente = pedido.getEnderecoRemetente();
 		this.enderecoDestinatario = pedido.getEnderecoDestinatario();
 	}
-
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public String getEnderecoDestinatario() {
+	public Endereco getEnderecoDestinatario() {
 		return enderecoDestinatario;
 	}
-
-	public void setEnderecoDestinatario(String enderecoDestinatario) {
+	public void setEnderecoDestinatario(Endereco enderecoDestinatario) {
 		this.enderecoDestinatario = enderecoDestinatario;
 	}
-
-	public String getEnderecoRemetente() {
+	public Endereco getEnderecoRemetente() {
 		return enderecoRemetente;
 	}
-
-	public void setEnderecoRemetente(String enderecoRemetente) {
+	public void setEnderecoRemetente(Endereco enderecoRemetente) {
 		this.enderecoRemetente = enderecoRemetente;
 	}
-
-	@Override
-	public String toString() {
-		return "PedidoEntregaDto [id=" + id + ", enderecoDestinatario=" + enderecoDestinatario + ", enderecoRemetente="
-				+ enderecoRemetente + "]";
-	}
-
 	
 }
