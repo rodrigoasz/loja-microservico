@@ -3,10 +3,17 @@ package br.com.lecom.rodrigo.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Embeddable
 public class Endereco implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	
+
+	private Long id;
 	private String endereco;
 	private String bairro;
 	private String cidade;

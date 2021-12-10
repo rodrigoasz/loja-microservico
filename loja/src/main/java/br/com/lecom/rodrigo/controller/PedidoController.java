@@ -20,12 +20,14 @@ import br.com.lecom.rodrigo.model.Pedido;
 import br.com.lecom.rodrigo.proxy.TransportadoraProxy;
 import br.com.lecom.rodrigo.response.CodRastreioResponse;
 import br.com.lecom.rodrigo.response.ProdutoResponse;
+import br.com.lecom.rodrigo.service.PedidoService;
 
 @RestController
 @RequestMapping("/pedidos")
 public class PedidoController {
+
 	@Autowired
-	private TransportadoraProxy proxy;
+	private PedidoService pedidoService;
 	
 	@GetMapping()
 	public List<Pedido> findAll() {
@@ -43,11 +45,7 @@ public class PedidoController {
 	
 	@PostMapping()
 	public Pedido realizaPedido(@RequestBody PedidoDto pedidoDto) {
-		Pedido pedido = new Pedido(pedidoDto);
-		PedidoEntregaDto pedidoEntregaDto = new PedidoEntregaDto(pedido);
-		CodRastreioResponse rastreioResponse = proxy.enviaPostagem(pedidoEntregaDto);
-		pedido.setCodigoRastreio(rastreioResponse.getCodigoRastreio());
-		pedido.setPrevisaoEntrega(rastreioResponse.getPrevisaoParaEntrega());
+		Pedido pedido = pedidoService.realizaPedido(pedidoDto);
 		return pedido;
 	}
 
@@ -64,11 +62,11 @@ public class PedidoController {
 		produtos1.add(produto1);
 
 		Endereco enderecoDestino = new Endereco("Rua Sebastiao 1-30", "Vila Maria", "Bauru", "São Paulo", "30.451-908");
-		Pedido pedido = new Pedido((long) 0, produtos, enderecoDestino, Loja.LOJA_ENDERECO, BigDecimal.TEN, "");
-		Pedido pedido2 = new Pedido((long) 1, produtos1, enderecoDestino, Loja.LOJA_ENDERECO, BigDecimal.ONE, "");
-
-		pedidos.add(pedido);
-		pedidos.add(pedido2);
+////		Pedido pedido = new Pedido((long) 0, produtos, enderecoDestino, Loja.LOJA_ENDERECO, BigDecimal.TEN, "");
+////		Pedido pedido2 = new Pedido((long) 1, produtos1, enderecoDestino, Loja.LOJA_ENDERECO, BigDecimal.ONE, "");
+//
+//		pedidos.add(pedido);
+//		pedidos.add(pedido2);
 
 		return pedidos;
 	}

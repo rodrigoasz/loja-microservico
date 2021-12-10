@@ -13,10 +13,10 @@ public class CodigoRastreioService {
 
 	@Autowired
 	private EntregaRepository repository;
-	
 	public EntregaPedido salvaPedido(PedidoEntregaResponse response) {
 		EntregaPedido entrega = new EntregaPedido(response);
 		repository.save(entrega);
+		
 		return entrega;
 	}
 	
@@ -25,6 +25,7 @@ public class CodigoRastreioService {
 		entrega.setCodRastreio();
 		CodigoRastreioDto rastreio = new CodigoRastreioDto(entrega.getPrevisaoParaEntrega(),entrega.getCodRastreio());
 		repository.save(entrega);
+		System.out.println(rastreio);
 		return rastreio;
 		
 	}

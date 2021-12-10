@@ -3,31 +3,23 @@ package br.com.lecom.rodrigo.Dto;
 import java.util.List;
 
 import br.com.lecom.rodrigo.model.Endereco;
-import br.com.lecom.rodrigo.response.ProdutoResponse;
+import br.com.lecom.rodrigo.model.Produto;
 
 public class PedidoDto {
 	
-	private Long id;
-	private List<ProdutoResponse> produtos;
+	private List<Produto> produtos;
 	private Endereco enderecoDestinatario;
 	
 	public PedidoDto() {}
-	public PedidoDto(Long id, List<ProdutoResponse> produtos, Endereco enderecoDestinatario) {
-		super();
-		this.id = id;
+	public PedidoDto(List<Produto> produtos, Endereco enderecoDestinatario) {
 		this.produtos = produtos;
 		this.enderecoDestinatario = enderecoDestinatario;
 	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public List<ProdutoResponse> getProdutos() {
+
+	public List<Produto> getProdutos() {
 		return produtos;
 	}
-	public void setProdutos(List<ProdutoResponse> produtos) {
+	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
 	}
 	public Endereco getEnderecoDestinatario() {

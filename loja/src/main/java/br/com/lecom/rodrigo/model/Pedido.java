@@ -5,17 +5,32 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-import br.com.lecom.rodrigo.Dto.PedidoDto;
-import br.com.lecom.rodrigo.response.ProdutoResponse;
+import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
+import br.com.lecom.rodrigo.Dto.PedidoDto;
+
+@Entity
 public class Pedido implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	//private static Long contador=0l;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private List<ProdutoResponse> produtos;
-	private Endereco enderecoDestinatario;
-	private Endereco enderecoRemetente;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "pedidoId")
+	private List<Produto> produtos;
+	
+	private String enderecoDestinatario;
+	
+	private String enderecoRemetente;
 	private BigDecimal valor;
 	private String codigoRastreio;
 	private LocalDate previsaoEntrega;
@@ -25,22 +40,21 @@ public class Pedido implements Serializable {
 
 	public Pedido(PedidoDto pedidoDto) {
 
-		this.id = pedidoDto.getId();
+		//this.id = contador++;
 		this.produtos = pedidoDto.getProdutos();
 		calculaValor(produtos);
-
-		this.enderecoDestinatario = pedidoDto.getEnderecoDestinatario();
-		this.enderecoRemetente = Loja.LOJA_ENDERECO;
+		this.enderecoDestinatario = pedidoDto.getEnderecoDestinatario().toString();
+		this.enderecoRemetente = Loja.LOJA_ENDERECO.toString();
 
 	}
 
-	public Pedido(Long id, List<ProdutoResponse> produtos, Endereco enderecoDestinatario, Endereco enderecoRemetente,
+	public Pedido(Long id, List<Produto> produtos, Endereco enderecoDestinatario, Endereco enderecoRemetente,
 			BigDecimal valor, String codigoRastreio) {
 		super();
 		this.id = id;
 		this.produtos = produtos;
-		this.enderecoDestinatario = enderecoDestinatario;
-		this.enderecoRemetente = enderecoRemetente;
+		this.enderecoDestinatario = enderecoDestinatario.toString();
+		this.enderecoRemetente = enderecoRemetente.toString();
 		this.valor = valor;
 		this.codigoRastreio = codigoRastreio;
 	}
@@ -53,23 +67,24 @@ public class Pedido implements Serializable {
 		this.id = id;
 	}
 
-	public Endereco getEnderecoDestinatario() {
+	
+	public String getEnderecoDestinatario() {
 		return enderecoDestinatario;
 	}
 
-	public void setEnderecoDestinatario(Endereco enderecoDestinatario) {
+	public void setEnderecoDestinatario(String enderecoDestinatario) {
 		this.enderecoDestinatario = enderecoDestinatario;
 	}
 
-	public Endereco getEnderecoRemetente() {
+	public String getEnderecoRemetente() {
 		return enderecoRemetente;
 	}
 
-	public void setEnderecoRemetente(Endereco enderecoRemetente) {
+	public void setEnderecoRemetente(String enderecoRemetente) {
 		this.enderecoRemetente = enderecoRemetente;
 	}
 
-	public List<ProdutoResponse> getProdutos() {
+	public List<Produto> getProdutos() {
 		return produtos;
 	}
 
@@ -99,10 +114,18 @@ public class Pedido implements Serializable {
 		this.previsaoEntrega = previsaoEntrega;
 	}
 
-	public void calculaValor(List<ProdutoResponse> produtos) {
+	public void calculaValor(List<Produto> produtos) {
 		this.valor = new BigDecimal(0);
 		produtos.forEach(produto -> this.valor=this.valor.add(produto.getPrecoUnitario()));
 		
 	}
+
+	@Override
+	public String toString() {
+		return "Pedido [id=" + id + ", produtos=" + produtos + ", enderecoDestinatario=" + enderecoDestinatario
+				+ ", enderecoRemetente=" + enderecoRemetente + ", valor=" + valor + ", codigoRastreio=" + codigoRastreio
+				+ ", previsaoEntrega=" + previsaoEntrega + "]";
+	}
+	
 
 }
