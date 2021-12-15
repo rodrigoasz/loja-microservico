@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "7d85e5a5-e826-486d-a49b-2eb48316c050",
+		"name": "Loja-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Microservico Catalogo - busca do catalogo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/catalogo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"catalogo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Microservico Loja - busca do catalogo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8010/produtos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8010",
+					"path": [
+						"produtos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Microservico Loja - buscar todos pedidos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8010/pedidos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8010",
+					"path": [
+						"pedidos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Microservico Loja - buscar um id de pedido",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8010/pedidos/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8010",
+					"path": [
+						"pedidos",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Microservico Loja - Criar um pedido e recebe um Codigo de rastreio",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"produtos\": [\r\n        {\r\n            \"nomeProduto\": \"Produto 1\",\r\n            \"precoUnitario\": 10,\r\n            \"quantidade\": 2\r\n        },\r\n        {\r\n            \"nomeProduto\": \"Produto 2\",\r\n            \"precoUnitario\": 1,\r\n            \"quantidade\": 1\r\n        }\r\n    ],\r\n    \"enderecoDestinatario\": {\r\n        \"endereco\": \"Rua Sebastiao 1-30\",\r\n        \"bairro\": \"Vila Maria\",\r\n        \"cidade\": \"Bauru\",\r\n        \"estado\": \"São Paulo\",\r\n        \"cep\": \"30.451-908\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8010/pedidos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8010",
+					"path": [
+						"pedidos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -25,7 +25,6 @@ public class CodigoRastreioService {
 		entrega.setCodRastreio();
 		CodigoRastreioDto rastreio = new CodigoRastreioDto(entrega.getPrevisaoParaEntrega(),entrega.getCodRastreio());
 		repository.save(entrega);
-		System.out.println(rastreio);
 		return rastreio;
 		
 	}

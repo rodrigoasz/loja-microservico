@@ -6,8 +6,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,27 +21,26 @@ import br.com.lecom.rodrigo.Dto.PedidoDto;
 public class Pedido implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	//private static Long contador=0l;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "pedidoId")
 	private List<Produto> produtos;
-	
 	private String enderecoDestinatario;
-	
 	private String enderecoRemetente;
 	private BigDecimal valor;
 	private String codigoRastreio;
 	private LocalDate previsaoEntrega;
+	@Enumerated(EnumType.STRING)
+	private PedidoState status;
 
 	public Pedido() {
 	}
 
 	public Pedido(PedidoDto pedidoDto) {
 
-		//this.id = contador++;
 		this.produtos = pedidoDto.getProdutos();
 		calculaValor(produtos);
 		this.enderecoDestinatario = pedidoDto.getEnderecoDestinatario().toString();
@@ -48,16 +48,6 @@ public class Pedido implements Serializable {
 
 	}
 
-	public Pedido(Long id, List<Produto> produtos, Endereco enderecoDestinatario, Endereco enderecoRemetente,
-			BigDecimal valor, String codigoRastreio) {
-		super();
-		this.id = id;
-		this.produtos = produtos;
-		this.enderecoDestinatario = enderecoDestinatario.toString();
-		this.enderecoRemetente = enderecoRemetente.toString();
-		this.valor = valor;
-		this.codigoRastreio = codigoRastreio;
-	}
 
 	public Long getId() {
 		return id;
@@ -114,11 +104,21 @@ public class Pedido implements Serializable {
 		this.previsaoEntrega = previsaoEntrega;
 	}
 
+	
+	public PedidoState getStatus() {
+		return status;
+	}
+
+	public void setStatus(PedidoState status) {
+		this.status = status;
+	}
+
 	public void calculaValor(List<Produto> produtos) {
 		this.valor = new BigDecimal(0);
-		produtos.forEach(produto -> this.valor=this.valor.add(produto.getPrecoUnitario()));
+		produtos.forEach(produto -> this.valor=this.valor.add(produto.getPrecoUnitario().multiply(BigDecimal.valueOf(produto.getQuantidade()))));
 		
 	}
+	
 
 	@Override
 	public String toString() {

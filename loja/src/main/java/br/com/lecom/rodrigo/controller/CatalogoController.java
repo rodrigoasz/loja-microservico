@@ -8,22 +8,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.lecom.rodrigo.proxy.CatalogoProxy;
 import br.com.lecom.rodrigo.response.ProdutoResponse;
+import br.com.lecom.rodrigo.service.CatalogoService;
 
 @RestController
 @RequestMapping("/produtos")
 public class CatalogoController {
 	@Autowired
-	private CatalogoProxy catalogoProxy;
+	private CatalogoService catalogoService;
 	
 	@GetMapping
 	public List<ProdutoResponse> findCatalogo(){
 		List<ProdutoResponse> produtos = new ArrayList<>();
-		produtos = catalogoProxy.findAll();
+		produtos = catalogoService.findAll();
 		return produtos;
 		
 	}
-	
 	
 }

@@ -8,12 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Embeddable
+
 public class Endereco implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
 	private String endereco;
 	private String bairro;
 	private String cidade;
@@ -79,11 +78,10 @@ public class Endereco implements Serializable {
 				&& Objects.equals(cidade, other.cidade) && Objects.equals(endereco, other.endereco)
 				&& Objects.equals(estado, other.estado);
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Endereco [endereco=" + endereco + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado
-				+ ", cep=" + cep + "]";
+		return (endereco +" - "+ bairro + ". "+ cidade + " - "+ estado + ". CEP: "+ cep);
 	}
 	
 	

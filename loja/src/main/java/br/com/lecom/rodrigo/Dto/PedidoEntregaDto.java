@@ -1,6 +1,5 @@
 package br.com.lecom.rodrigo.Dto;
 
-import br.com.lecom.rodrigo.model.Endereco;
 import br.com.lecom.rodrigo.model.Pedido;
 
 public class PedidoEntregaDto {
